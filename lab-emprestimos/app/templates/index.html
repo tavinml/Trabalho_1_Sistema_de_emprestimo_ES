@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Visão geral</h1>
+
+<h2>Emprestado agora ({{ ativos|length }})</h2>
+{% if ativos %}
+<table>
+    <tr><th>Aluno</th><th>Matrícula</th><th>Equipamento</th><th>Devolução prevista</th></tr>
+    {% for e in ativos %}
+    <tr>
+        <td>{{ e.aluno }}</td>
+        <td>{{ e.matricula }}</td>
+        <td>{{ e.equipamento }} ({{ e.patrimonio }})</td>
+        <td>{{ e.data_devolucao_prevista }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhum equipamento emprestado no momento.</p>
+{% endif %}
+
+<h2>Atrasados ({{ atrasados|length }})</h2>
+{% if atrasados %}
+<table>
+    <tr><th>Aluno</th><th>Matrícula</th><th>Equipamento</th><th>Devolução prevista</th></tr>
+    {% for e in atrasados %}
+    <tr class="atrasado">
+        <td>{{ e.aluno }}</td>
+        <td>{{ e.matricula }}</td>
+        <td>{{ e.equipamento }} ({{ e.patrimonio }})</td>
+        <td>{{ e.data_devolucao_prevista }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhum atraso no momento.</p>
+{% endif %}
+{% endblock %}

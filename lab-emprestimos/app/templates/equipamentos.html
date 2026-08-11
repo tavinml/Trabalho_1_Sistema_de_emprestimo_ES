@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Equipamentos</h1>
+{% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
+
+<form class="form-cadastro" method="post" action="/equipamentos">
+    <input name="patrimonio" placeholder="Nº de patrimônio" required>
+    <input name="nome" placeholder="Nome do equipamento" required>
+    <button type="submit">Cadastrar</button>
+</form>
+
+<table>
+    <tr><th>Patrimônio</th><th>Nome</th><th>Status</th></tr>
+    {% for e in equipamentos %}
+    <tr>
+        <td>{{ e.patrimonio }}</td>
+        <td>{{ e.nome }}</td>
+        <td>{{ "Disponível" if e.disponivel else "Emprestado" }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Alunos</h1>
+{% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
+
+<form class="form-cadastro" method="post" action="/alunos">
+    <input name="matricula" placeholder="Matrícula" required>
+    <input name="nome" placeholder="Nome" required>
+    <button type="submit">Cadastrar</button>
+</form>
+
+<table>
+    <tr><th>Matrícula</th><th>Nome</th></tr>
+    {% for a in alunos %}
+    <tr><td>{{ a.matricula }}</td><td>{{ a.nome }}</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
