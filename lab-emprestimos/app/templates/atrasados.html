@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Relatório de atrasos</h1>
+<p>Lista apenas os empréstimos ativos com devolução vencida agora (não é um histórico).</p>
+
+{% if atrasados %}
+<table>
+    <tr><th>Aluno</th><th>Matrícula</th><th>Equipamento</th><th>Devolução prevista</th></tr>
+    {% for e in atrasados %}
+    <tr class="atrasado">
+        <td>{{ e.aluno }}</td>
+        <td>{{ e.matricula }}</td>
+        <td>{{ e.equipamento }} ({{ e.patrimonio }})</td>
+        <td>{{ e.data_devolucao_prevista }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhum atraso no momento.</p>
+{% endif %}
+{% endblock %}

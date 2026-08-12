@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Empréstimos</h1>
+{% if erro %}<div class="erro">{{ erro }}</div>{% endif %}
+
+<h2>Registrar novo empréstimo</h2>
+<form class="form-cadastro" method="post" action="/emprestimos">
+    <input name="matricula" placeholder="Matrícula do aluno" required>
+    <input name="patrimonio" placeholder="Patrimônio do equipamento" required>
+    <button type="submit">Emprestar (48h)</button>
+</form>
+
+<h2>Emprestado agora</h2>
+{% if ativos %}
+<table>
+    <tr><th>Aluno</th><th>Equipamento</th><th>Devolução prevista</th><th></th></tr>
+    {% for e in ativos %}
+    <tr>
+        <td>{{ e.aluno }} ({{ e.matricula }})</td>
+        <td>{{ e.equipamento }} ({{ e.patrimonio }})</td>
+        <td>{{ e.data_devolucao_prevista }}</td>
+        <td>
+            <form class="inline" method="post" action="/emprestimos/{{ e.id }}/devolucao">
+                <button class="btn-devolver" type="submit">Registrar devolução</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+<p>Nenhum equipamento emprestado no momento.</p>
+{% endif %}
+{% endblock %}
